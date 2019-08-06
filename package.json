@@ -5,6 +5,7 @@
   "homepage": "https://joshvanoverbeke.github.io/EA-Assessment/",
   "dependencies": {
     "axios": "^0.19.0",
+    "gh-pages": "^2.1.0",
     "mdbreact": "^4.19.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
@@ -15,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy":"gh-pages -b master -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
