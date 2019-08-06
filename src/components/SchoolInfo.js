@@ -9,6 +9,10 @@ function SchoolInfo(props){
             </h1>
 
             <h2>
+                {props.stuTotal}
+            </h2>
+
+            <h2>
                 {props.website}
             </h2>
 
