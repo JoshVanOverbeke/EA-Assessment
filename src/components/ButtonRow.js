@@ -1,17 +1,15 @@
 import React from 'react';
 
-function ButtonRow(){
+function ButtonRow(props){
     return(
-        <div className="row text-center">
+        <div className="col-8">
 
             <div className="col-4">
                 <button className="">Download</button>
             </div>
+
             <div className="col-4">
-                <button>Save as PDF</button>
-            </div>
-            <div className="col-4">
-                <button className="">Print</button>
+                <button className="" onClick={() => window.print()}>Print</button>
             </div>
 
         </div>

@@ -5,7 +5,9 @@ import DonutChart from "./components/DonutChart";
 // import Graph from "./components/Graph";
 import SchoolInfo from "./components/SchoolInfo";
 import API from "./utils/API";
+// import jsPDF from 'jspdf';
 import './App.css';
+import Pdf from "react-to-pdf";
 
 //variables for the donut charts
 const ethLabels = ["AIAN", "Asian", "Black", "Hispanic", "NHPI", "Non-Resident Alien", "Two or More", "Unknown", "White"];
@@ -17,10 +19,16 @@ let   proData = [];
 let   proLabels = [];
 //obj for cleaning out null, undefined or 0 variables from datasets
 let   cleanObj = {};
+const ref = React.createRef();
+//option set for the pdf downloader
+const options = {
+  orientation: 'portrait',
+  unit: 'in',
+  format: [1600,1150]
+};
 
 
 class App extends Component {
- 
   //where relevant data will be stored
   state = {
     school: {},
@@ -77,7 +85,6 @@ class App extends Component {
     }
   }
 
-
   render() {
     //removes nulls, undefineds and 0's from program percentage object
     cleanObj = this.state.proObj;
@@ -87,7 +94,7 @@ class App extends Component {
     proLabels = Object.keys(cleanObj);
 
     return (
-      <div className="container">
+      <div className="container" ref = {ref}>
         <SchoolInfo 
         name={this.state.school.name}
         stuTotal={this.state.enrollment}
@@ -114,7 +121,15 @@ class App extends Component {
           HBGColor={ethHBGColor}
           />
         </MDBContainer>
-        <ButtonRow />
+        <div className="row text-center">
+          <ButtonRow 
+          savePDF={this.savePDF}
+          />
+          <Pdf className="col-4" targetRef={ref} filename="ea-assessment.pdf" options={options} x={0.5} y={0.5}>
+            {({ toPdf }) => <button onClick={toPdf}>Save as Pdf</button>}
+          </Pdf>
+        </div>
+
       </div>
     );
   }
