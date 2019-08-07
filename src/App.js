@@ -5,7 +5,6 @@ import DonutChart from "./components/DonutChart";
 // import Graph from "./components/Graph";
 import SchoolInfo from "./components/SchoolInfo";
 import API from "./utils/API";
-// import jsPDF from 'jspdf';
 import './App.css';
 import Pdf from "react-to-pdf";
 
@@ -84,14 +83,21 @@ class App extends Component {
       }
     }
   }
-
+  regex = array => {
+    for (var i = 0; i < array.length; i++) {
+      array[i] = array[i].toString().replace(/_/g, " ");
+    };
+  }
   render() {
     //removes nulls, undefineds and 0's from program percentage object
     cleanObj = this.state.proObj;
     this.clean(cleanObj);
     //set proData and proLabels from objects into arrays that can be used in donut chart
     proData = Object.values(cleanObj);
+
     proLabels = Object.keys(cleanObj);
+    this.regex(proLabels);
+    console.log(proLabels);
 
     return (
       <div className="container" ref = {ref}>
