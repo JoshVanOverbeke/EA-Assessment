@@ -32,6 +32,8 @@ Again if there are no errors you should have your very own EA-Assessment app run
 
 You can hover over the various charts to see number representations of the visual data presented.
 
+![Hover](/src/images/hover.png)
+
 You can print the page using the print button.
 
 Or download the data as a .json file
