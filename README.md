@@ -36,10 +36,15 @@ You can hover over the various charts to see number representations of the visua
 
 You can print the page using the print button.
 
+![print](/src/images/print.png)
+
 Or download the data as a .json file
+
+![Download](/src/images/download.png)
 
 And even save it as PDF
 
+![Save PDF](/src/images/pdf.png)
 
 ### Notes/future work
 The app only does one API call but I tried to structure the data in a way that it could populated the page as long as you made a similar query. I didn't accomplish this with the Race/Ethnicity data as the object recieved from the API call for this held data that wasn't relevant but wasn't null or 0. I would also like to add more regular expressions to format the data with uppercases and the like.
