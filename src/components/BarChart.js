@@ -23,7 +23,7 @@ function BarChart(props){
           },
           barChartOptions: {
             responsive: true,
-            maintainAspectRatio: false,
+            maintainAspectRatio: true,
             scales: {
               xAxes: [
                 {

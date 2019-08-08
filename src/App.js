@@ -14,7 +14,7 @@ const ref = React.createRef();
 const options = {
   orientation: 'portrait',
   unit: 'in',
-  format: [1600,1150]
+  format: [2400,1750]
 };
 //variables for the donut charts
 const ethLabels = ["AIAN", "Asian", "Black", "Hispanic", "NHPI", "Non-Resident Alien", "Two or More", "Unknown", "White"];
@@ -151,7 +151,7 @@ class App extends Component {
     }
 
     return (
-      <div className="container" ref = {ref}>
+      <div className="container mainWrapper" ref = {ref}>
         <SchoolInfo 
         name={this.state.school.name}
         stuTotal={this.state.enrollment}
