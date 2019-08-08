@@ -1,9 +1,9 @@
 import React from 'react';
 
-function ButtonPrint(props){
+function ButtonPrint(){
     return(
         <div className="col-4">
-            <button className="" onClick={() => window.print()}>Print</button>
+            <button className="btn btn-outline-blue-grey waves-effect" onClick={() => window.print()}><span title="Print"><i class="fas fa-print"></i></span></button>
 
         </div>
     );
