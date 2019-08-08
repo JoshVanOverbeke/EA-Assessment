@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { MDBContainer } from "mdbreact";
-import ButtonRow from "./components/ButtonRow";
+import ButtonPrint from "./components/ButtonPrint";
+import ButtonDownload from "./components/ButtonDownload";
 import DonutChart from "./components/DonutChart";
-// import Graph from "./components/Graph";
+import BarChart from "./components/BarChart";
 import SchoolInfo from "./components/SchoolInfo";
 import API from "./utils/API";
 import './App.css';
@@ -16,6 +17,8 @@ const proBGColor = ["#EE8874","#E8817F","#DE7D8A","#D17B93","#C17B9A","#AE7B9F",
 const proHBGColor = ["#3A1D19","#412021","#47242A","#4B2934","#4D2F3E","#4D3648","#4B3D51","#47455A","#414D61","#3B5566","#335D69","#2D646A","#2A6B69","#2D7266","#357861","#427E5A","#518354","#61874D","#748B47","#878E42","#9B9041","#AF9143","#C39149","#D69153","#E89061"];
 let   proData = [];
 let   proLabels = [];
+let   tuiData = [];
+let   tuiLabels = [];
 //obj for cleaning out null, undefined or 0 variables from datasets
 let   cleanObj = {};
 const ref = React.createRef();
@@ -36,6 +39,7 @@ class App extends Component {
     latest: {},
     ethArray: [],
     proObj: {},
+    tuition: {},
     returned: false
   };
   //once page is loaded and the app mounts, run the function to search and save the data
@@ -69,6 +73,7 @@ class App extends Component {
           res.data.results[0].latest.student.demographics.race_ethnicity.white
         ]),
         proObj: res.data.results[0].latest.academics.program_percentage, 
+        tuition: res.data.results[0].latest.cost.tuition,
         returned: true 
       })
     )
@@ -94,10 +99,15 @@ class App extends Component {
     this.clean(cleanObj);
     //set proData and proLabels from objects into arrays that can be used in donut chart
     proData = Object.values(cleanObj);
-
     proLabels = Object.keys(cleanObj);
     this.regex(proLabels);
-    console.log(proLabels);
+    
+    // Do the same for tuition data as above
+    cleanObj = this.state.tuition;
+    this.clean(cleanObj);
+    tuiData = Object.values(cleanObj);
+    tuiLabels = Object.keys(cleanObj);
+    this.regex(tuiLabels);
 
     return (
       <div className="container" ref = {ref}>
@@ -127,13 +137,22 @@ class App extends Component {
           HBGColor={ethHBGColor}
           />
         </MDBContainer>
-        <div className="row text-center">
-          <ButtonRow 
-          savePDF={this.savePDF}
+        <MDBContainer>
+          <BarChart 
+          chartTitle= "In-state vs Out-of-state Tuition Cost"
+          data= {tuiData}
+          labels= {tuiLabels}
+          label= "Dollars per Academic Year"
           />
-          <Pdf className="col-4" targetRef={ref} filename="ea-assessment.pdf" options={options} x={0.5} y={0.5}>
-            {({ toPdf }) => <button onClick={toPdf}>Save as Pdf</button>}
-          </Pdf>
+        </MDBContainer>
+        <div className="row text-center">
+          <ButtonPrint />
+          <ButtonDownload />
+          <div className="col-4">
+            <Pdf  targetRef={ref} filename="ea-assessment.pdf" options={options} x={0.5} y={0.5}>
+              {({ toPdf }) => <button onClick={toPdf}>Save as Pdf</button>}
+            </Pdf>
+          </div>
         </div>
 
       </div>
