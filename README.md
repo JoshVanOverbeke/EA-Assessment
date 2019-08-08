@@ -1,5 +1,5 @@
 # EA-Assessment
-
+Created by Josh VanOverbeke
 ## Description
 An app made using react which makes a single api call and populates a page using that data.
 
